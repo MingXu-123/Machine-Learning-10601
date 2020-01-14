@@ -1,0 +1,73 @@
+\section{Recommender Systems [10pt]}
+
+\begin{enumerate}
+%  \item \textbf{[5pts]} Applied to the Netflix Prize problem, which of the following methods does NOT always requires side information about the users and the movies?
+    
+%     \textbf{Select all that apply:}
+    
+%         \begin{list}{}
+%         \item $\square$ Recommender system
+%         \item $\square$ Neighborhood methods
+%         \item $\square$ Content filtering
+%         \item $\square$ latent factor methods
+%         \item $\square$ Collaborative filtering
+%     \end{list}
+    
+  
+ \item \textbf{[4pts]} In which of the following situations will a collaborative filtering system be the most appropriate learning algorithm compared to linear or logistic regression?
+    
+    \textbf{Select all that apply:}
+    
+        \begin{list}{}
+        \item $\square$ You manage an online bookstore and you have the book ratings from many users. For each user, you want to recommend other books she will enjoy, based on her own ratings and the ratings of other users.
+        \item $\square$ You run an online news aggregator, and for every user, you know some subset of articles that the user likes and some different subset that the user dislikes. You'd want to use this to find other articles that the user likes.
+        \item $\square$ You've written a piece of software that has downloaded news articles from many news websites. In your system, you also keep track of which articles you personally like vs. dislike, and the system also stores away features of these articles (e.g., word counts, name of author). Using this information, you want to build a system to try to find additional new articles that you personally will like.
+        \item $\square$ You manage an online bookstore and you have the book ratings from many users. You want to learn to predict the expected sales volume (number of books sold) as a function of the average rating of a book.
+    \end{list}
+    
+
+ \item \textbf{[3pts]} What is the basic intuition behind matrix factorization?
+    
+    \textbf{Select all that apply:}
+    
+        \begin{list}{}
+        \item $\square$ That content filtering and collaborative filtering are just two different factorizations of the same rating matrix.
+        \item $\square$ That factoring user and item matrices can partition the users and items into clusters that can be treated identically, reducing the complexity of making recommendations.
+        \item $\square$ The user-user and item-item correlations are more efficiently computed by factoring matrices.
+        \item $\square$ That user-item relations can be well described in a low dimensional space that can be computed from the rating matrices.
+    \end{list}
+    
+    
+    \clearpage
+    
+     \item \textbf{[3pts]} When building a recommender system using matrix factorization, the regularized objective function we wish to minimize is:
+     $$J(\Wv, \Hv) = \frac{1}{2} \sum_{u,i \in \Zc}(v_{ui}-\wv_u^T \hv_i)^2+\lambda(\sum_u ||\wv_u||^2+\sum_i ||\hv_i||^2)$$
+     where $\wv_u$ is the $u$th row of $\Wv$ and the vector representing user $u$; $\hv_i$ is the $i$th row of $\Hv$ and the vector representing item $i$; $\Zc$ is the index set of observed user/item ratings in the training set; and $\lambda$ is the weight of the L2 regularizer. One method of solving this optimization problem is to apply Block Coordinate Descent. The algorithms proceeds as shown below:
+     
+     \begin{itemize}
+         \item while not converged:
+         \begin{itemize}
+            \item for $u$ in $\{1, \ldots, N_u\}$:
+            \begin{itemize}
+                \item $\wv_{u'} \leftarrow \argmin_{\wv_{u'}} J(\Wv, \Hv)$
+            \end{itemize}
+            \item for $i$ in $\{1, \ldots N_i\}$
+             \begin{itemize}
+                \item $\hv_{i'} \leftarrow \argmin_{\hv_{i'}} J(\Wv, \Hv)$
+            \end{itemize}
+         \end{itemize}
+     \end{itemize}
+     
+     Doing so yields an algorithm called Alternating Least Squares (ALS) for matrix factorization. Which of the following is equal to the \emph{transpose} of $\argmin_{\wv_{u'}} J(\Wv, \Hv)$?\\
+     \textbf{Select one:}
+
+        \begin{list}{}
+        \item $\circle$ $v_uH(H^TH+\lambda I)^{-1}$
+        \item $\circle$ $(H^TH+\lambda I)^{-T}v_uH$
+        \item $\circle$ $v_uH(H^TH+\lambda I)^{-T}$
+        \item $\circle$ $v_uH(H^TH)^{-1}$
+    \end{list}    
+    
+    
+    \end{enumerate}
+    

@@ -1,0 +1,88 @@
+\section{Baum Welch [19pt]}
+In the following HMM questions, suppose the hidden states corresponding to a sequence of $T$ observations $O=o_1, ..., o_T$ are $x_1, ..., x_T$, where each hidden states has $N$ possible values. $\pi_i$ represents the initial probablity (i.e. $P(x_0=i)$). $A$ represents transition probabilities where each component $a_{ij}$ is the probability of transitioning from state $i$ to state $j$ (i.e., $=P(x_{t+1}=j|x_t=i)$). $B$ represents the emission probabilities where each component $b_i(o_t)$ is the likelihood of $o_t$ generated from a state $i$ (i.e., $=P(o_t|x_t=i)$). $\lambda=(A,B)$ uniquely defines the HMM problem. \\
+HMM is composed of three fundamental problems: \textbf{likelihood}, \textbf{decoding} and \textbf{learning}. The likelihood problem is to determine $P(O|\lambda)=P(o_1, ..., o_T|\lambda)$. The decoding problem is to discover the best hidden state sequence $X=x_1, ..., x_T$. The learning problem is to learn HMM parameters, and the following questions will guide you to solve each of the problems described above.
+
+\begin{enumerate}
+    \item \textbf{[3pts]} Which of the following quantities are equivalent to \textbf{likelihood} $P(O|\lambda)$? Recall that we defined $\alpha_t(j)=P(o_1, o_2, ..., o_t, x_t=j|\lambda)$ and $\beta_t(i)=P(o_{t+1}, ..., o_T|x_t=i, \lambda)$. 
+    
+    \textbf{Select all that apply:}
+    
+    \begin{list}{}
+    \item $\square$ $\sum_{i=1}^N \beta_0(i)\pi_i$
+    \item $\square$ $\sum_{i=1}^N \beta_0(i)$
+    \item $\square$ $\sum_{i=1}^N \alpha_T(i)$
+    \item $\square$ $\sum_{i=1}^N \alpha_T(i)\pi_i$
+    \item $\square$ $\sum_{i=1}^N \beta_T(i)$
+    \item $\square$ None of the above
+    \end{list}
+    
+    
+    \item \textbf{[4pts]}  In this question, we explore the problems of \textbf{decoding} and \textbf{learning}. Which of the following statements are correct?
+    
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ The Viterbi algorithm is used for the decoding problem and has to know the hidden states in the training set in order to find the best sequence of hidden states for a sequence of testing observations.
+        \item $\square$ The goal of the Baum Welch algorithm iteratively learn  $\alpha_i$'s and $\beta_i$'s.
+        \item $\square$ Baum Welch algorithm is guaranteed to learn the best set of parameters since we use maximum likelihood estimators. 
+        \item $\square$ Unlike SGD, the likelihood that the Baum Welch algorithm tries to maximize is never going to decrease throughout iterations. 
+        \item $\square$ None of the above
+        
+    \end{list}
+    
+    
+    \item \textbf{[12pts]} In this question, we will explore the \textbf{learning} problem by discussing the Baum Welch algorithm. The algorithm uses two intermediate variables $\xi$ and $\gamma$. 
+    $$\xi_t(i, j)=P(x_t=i, x_{t+1}=j|O, \lambda)=\frac{P(x_t=i, x_{t+1}=j, O|\lambda)}{P(O|\lambda)}=\frac{\alpha_t(i)a_{ij}b_j(o_{t+1})\beta_{t+1}(j)}{P(O|\lambda)}$$
+    $$\gamma_t(i)=P(x_t=i|O, \lambda)=\frac{P(x_t=i, O|\lambda)}{P(O|\lambda)}=\frac{\alpha_t(i)\beta_t(i)}{P(O|\lambda)}$$
+    
+    And the MLE of $A$ (i.e., $a_{ij}$'s) and $B$ (i.e., $b_j(o_t)$'s) can be found using $\xi$ and $\gamma$. 
+    
+    % %We may not need to remind them of this since it was already covered in HW7
+    % Recall that the dynamic programming update rules of $\alpha$ and $\beta$ (same as in Viterbi) are:
+    % $$\alpha_1(i)=\pi_i b_i(o_1)$$
+    % $$\alpha_t(i)=\sum_{j=1}^N \alpha_{t-1}(j)a_{ji}b_i(o_t)$$
+    % $$\beta_T(i)=1$$
+    % $$\beta_t(i)=\sum_{j=1}^N a_{ij}b_j(o_{t+1})\beta_{t+1}(j)$$
+    
+   \begin{enumerate}
+         \item \textbf{[4pts]} The initialization of $A$ and $B$ will not affect the eventual HMM that we will learn. Justify your answer for no more than two sentences.\\
+        \textbf{Select one:}
+        \begin{list}{}
+            \item $\circle$ True
+            \item $\circle$ False
+        \end{list}
+        \textbf{NOTE: Please do not change the size of the following text box, and keep your answer in it. Thank you!} \\ \\
+        \begin{tcolorbox}[fit,height=4cm, width=15cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+        \large
+        Your answer.
+    
+        \end{tcolorbox} \\
+        \item \textbf{[2pts]} $\sum_{t=0}^{T-1}\xi_t(i, j)$ is the expected number of times that a hidden state $i$ is followed by a hidden state $j$ in the observation $O$. \\
+        \textbf{Select one:}
+        \begin{list}{}
+            \item $\circle$ True
+            \item $\circle$ False
+        \end{list}
+        \item \textbf{[2pts]} We can use $\xi^l(i, j)$  (i.e., the value of $\xi(i, j)$ in the $l^{\textrm{th}}$ iteration) alone to find $a^{l+1}_{ij}$ (i.e., the $a_{ij}$ in the $l+1^{\textrm{th}}$ iteration).\\
+        \textbf{Select one:}
+        \begin{list}{}
+            \item $\circle$ True
+            \item $\circle$ False
+        \end{list}
+        \clearpage
+        \item \textbf{[2pts]} In one iteration of Baum Welch, we first solve the \textbf{encoding} problem (i.e., finding the most probable sequence of hidden states) using the Viterbi algorithm in order to find the MLE for $A$ and $B$. \\
+        \textbf{Select one:}
+        \begin{list}{}
+            \item $\circle$ True
+            \item $\circle$ False
+        \end{list}
+        
+        \item \textbf{[2pts]} Baum Welch is an unsupervised learning method while Viterbi decoding is a supervised learning method.\\
+        \textbf{Select one:}
+        \begin{list}{}
+            \item $\circle$ True
+            \item $\circle$ False
+        \end{list}
+        
+   \end{enumerate}
+    
+\end{enumerate}

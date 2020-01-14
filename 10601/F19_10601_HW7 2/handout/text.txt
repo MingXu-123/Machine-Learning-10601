@@ -1,0 +1,13 @@
+python3 learnhmm.py toydata/toytrain.txt toydata/toy_index_to_word.txt toydata/toy_index_to_tag.txt toydata/hmmprior.txt toydata/hmmemit.txt toydata/hmmtrans.txt
+
+
+
+python3 learnhmm.py fulldata/trainwords.txt fulldata/index_to_word.txt fulldata/index_to_tag.txt fulldata/hmmprior.txt fulldata/hmmemit.txt fulldata/hmmtrans.txt
+
+
+
+python3 viterbi.py fulldata/testwords.txt fulldata/index_to_word.txt fulldata/index_to_tag.txt fulldata/hmmprior.txt fulldata/hmmemit.txt fulldata/hmmtrans.txt fulldata/predicted.txt fulldata/metrics.txt
+
+
+
+python3 viterbi.py toydata/toytest.txt toydata/toy_index_to_word.txt toydata/toy_index_to_tag.txt toydata/hmmprior.txt toydata/hmmemit.txt toydata/hmmtrans.txt toydata/predicted.txt toydata/metrics.txt

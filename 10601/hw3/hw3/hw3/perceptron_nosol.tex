@@ -1,0 +1,139 @@
+\section{Perceptron [22 pts]}
+\begin{enumerate}
+    \item \textbf{[2pt]} Consider running the online perceptron algorithm on some sequence of examples $S$ (an example is a data point and its label). Let $S^\prime$ be the same set of examples as $S$, but presented in a different order.
+    
+    True or False: the online perceptron algorithm is guaranteed to make the same number of mistakes on $S$ as it does on $S^\prime$.
+
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+
+
+    
+    \item \textbf{[3pt]} Suppose we have a perceptron whose inputs are 2-dimensional vectors and each feature vector component is either 0 or 1, i.e., $x_i \in \{0,1\}$. The prediction function $y = \operatorname{sign}(w_1x_1 + w_2x_2 + b)$, and
+    $$
+    \operatorname{sign}(z) = 
+    \begin{cases}
+    1, & \textrm{ if } z \geq 0\\
+    0, & \textrm{ otherwise}.
+    \end{cases}
+    $$
+    Which of the following functions can be implemented with the above perceptron? That is, for which of the following functions does there exist a set of parameters $w,b$ that correctly define the function. Select all that apply.
+    
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ AND function, i.e., the function that evaluates to 1 if and only if all inputs are 1, and 0 otherwise.
+        \item $\square$ OR function, i.e., the function that evaluates to 1 if and only if at least one of the inputs are 1, and 0 otherwise.
+        \item $\square$ XOR function, i.e., the function that evaluates to 1 if and only if the inputs are not all the same. For example
+        $$
+        \operatorname{XOR}(1,0) = 1, \textrm{ but } \operatorname{XOR}(1,1) = 0.
+        $$
+        \item $\square$ None of the above.
+    \end{list}
+
+    
+    
+    \clearpage
+    
+    \item \textbf{[2pt]} Suppose we have a dataset $\left\{ \left(\xv^{(1)},y^{(1)}\right),\ldots, \left(\xv^{(N)},y^{(N)}\right) \right\}$, where $\xv^{(i)} \in \mathbb{R}^M$, $y^{(i)}\in\{+1,-1\}$. We would like to apply the perceptron algorithm on this dataset. Assume there is no intercept term. How many parameter values is the perceptron algorithm learning?
+
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $N$
+        \item $\circle$ $N\times M$
+        \item $\circle$ $M$
+    \end{list}
+
+
+    
+    \item \textbf{[3pt]} Which of the following are true about the perceptron algorithm? Select all that apply.
+
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ The number of mistakes the perceptron algorithm makes is proportional to the size of the dataset. 
+        \item $\square$ The perceptron algorithm converges on any dataset.
+        \item $\square$ The perceptron algorithm can be used in the context of online learning.
+        \item $\square$ For linearly spearable data, the perceptron algorithm always finds the separating hyperplane with the largest margin.
+        \item $\square$ None of the above.
+    \end{list}
+
+    
+    
+    \item \textbf{[3pt]} Suppose we have the following data:     \begin{align*}
+        \xv^{(1)} &= [1,2] & \xv^{(2)} &= [-1,2] & \xv^{(3)} &= [-2,3] & \xv^{(4)} &= [1,-1] \\
+        y^{(1)} &= 1 & y^{(2)} &= -1 & y^{(3)} &= -1 & y^{(4)} &= 1
+    \end{align*}
+    Starting from $\wv = [0,0]$, what is the vector $\wv$ after running the perceptron algorithm with exactly one pass over the data (pass= one iteration of the algorithm, going through all datapoints)? Assume we are running the perceptron algorithm without an intercept term. If the value of the dot product of a data point and the weight vector is $0$, the algorithm makes the prediction 1.
+
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $[1,-2]$
+        \item $\circle$ $[2,0]$
+        \item $\circle$ $[-1,1]$
+        \item $\circle$ $[1,-3]$
+    \end{list}
+
+    
+    
+    \clearpage
+
+    \item \textbf{[2pt]} Please refer to previous question for the data. Assume we are running perceptron in the batch setting. How many passes will the perceptron algorithm make before converging to a perfect classifier, i.e., one that does not make any false predictions on this dataset?
+
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $2$
+        \item $\circle$ $3$
+        \item $\circle$ $5$
+        \item $\circle$ Infinitely many (the algorithm does not converge)
+    \end{list}
+
+    
+    
+        
+    % \clearpage
+    
+    \item \textbf{[3pt]} Please select the correct statement(s) about the mistake bound of the perceptron algorithm. Select all that apply.
+
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ If the minimum distance from any data point to the separating hyperplane is increased, without any other change to the data points, the mistake bound will also increase.
+        \item $\square$ If the whole dataset is shifted away from origin, then the mistake bound will also increase.
+        \item $\square$ If the size of the data set (i.e., the maximum pair-wise distance between data points) is increased, then the mistake bound will also increase.
+        \item $\square$ The mistake bound is linearly inverse-proportional to the minimum distance of any data point to the separating hyperplane of the data.
+        \item $\square$ None of the above.
+    \end{list}
+
+
+
+    \item \textbf{[2pt]} Given a zero-centered 3-dimensional dataset, the coordinate of the point with the highest L-2 norm is $(2, 2, 2)$. Assuming that the dataset is linearly separable with margin 2, what is the greatest number of mistakes that Perceptron could make?
+
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $1$
+        \item $\circle$ $2$
+        \item $\circle$ $3$
+        \item $\circle$ $4$
+    \end{list}
+
+\newpage
+    \item \textbf{[2pt]} Suppose we have data whose elements are of the form $[x_1,x_2]$, where $x_1 - x_2 = 0$. We do not know the label for each element. Suppose the perceptron algorithm starts with $\bm{\theta} = [3,5]$, which of the following values will $\bm{\theta}$ never take on in the process of running the perceptron algorithm on the data?
+
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $[-1,1]$
+        \item $\circle$ $[4,6]$
+        \item $\circle$ $[-3,-1]$
+        \item $\circle$ $[5,5]$
+    \end{list}
+
+
+    
+    
+
+    
+    
+
+    \clearpage
+\end{enumerate}

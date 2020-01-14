@@ -1,0 +1,236 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, enumerate, graphicx}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{bm}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{float}
+\usepackage{graphics}
+\setlength{\marginparwidth}{2.15cm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{epsfig}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows, automata}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage[font=scriptsize]{subcaption}
+\usepackage{float}
+\usepackage[]{algorithm2e}
+\usepackage{environ}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{lastpage}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{comment}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{marvosym}
+\usepackage{wrapfig}
+\usepackage{datetime}
+\usepackage[many]{tcolorbox}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wasysym}
+\usepackage{cancel}
+\usepackage{cprotect}
+\usepackage{listings}
+\usepackage{color}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\blackcircle}{\tikz\draw[black,fill=black] (0,0) circle (1ex);}
+\renewcommand{\circle}{\tikz\draw[black] (0,0) circle (1ex);}
+
+\newtcolorbox[]{solution}[1][]{%
+    breakable,
+    enhanced,
+    colback=white,
+    title=Solution,
+    #1
+}
+
+% SOLUTION environment
+\NewEnviron{soln}{
+\leavevmode\color{red}\ignorespaces \textbf{Solution} \BODY }{}
+
+% QUESTION AUTHORS environment
+\NewEnviron{qauthor}{
+\leavevmode\color{blue}\ignorespaces \textbf{Author} \BODY}{}
+
+% SOLUTION environment
+\NewEnviron{qlearningobjective}{
+\leavevmode\color{blue}\ignorespaces \textbf{Learning Objective } \BODY }{}
+
+% TO ONLY SHOW HOMEWORK QUESTIONS, include following (else comment out):
+   \RenewEnviron{soln}{} 
+  \RenewEnviron{qauthor}{}
+  \RenewEnviron{qlearningobjective}{}
+
+
+%\newcommand{\norm}[1]{\lVert #1 \rVert}
+%\newcommand{\st}{\mathrm{s.t.}}
+
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+\newcommand{\argmax}{\mathop{\mathrm{argmax}}}
+\newcommand{\argmin}{\mathop{\mathrm{argmin}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom Math                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{601math.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom box for highlights               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define box and box title style
+\tikzstyle{mybox} = [fill=blue!10, very thick,
+    rectangle, rounded corners, inner sep=1em, inner ysep=1em]
+
+% \newcommand{\notebox}[1]{
+% \begin{tikzpicture}
+% \node [mybox] (box){%
+%     \begin{minipage}{\textwidth}
+%     #1
+%     \end{minipage}
+% };
+% \end{tikzpicture}%
+% }
+
+\NewEnviron{notebox}{
+\begin{tikzpicture}
+\node [mybox] (box){
+    \begin{minipage}{\textwidth}
+        \BODY
+    \end{minipage}
+};
+\end{tikzpicture}
+}
+
+
+\begin{document}
+\section*{}
+\begin{center}
+  \centerline{\textsc{\LARGE  Homework 8}}
+  \vspace{0.5em}
+  \centerline{\textsc{\LARGE PCA, SVMs, Graphical Models, Baum Welch, }}\centerline{\textsc{\LARGE Ensemble Methods/Recommender Systems}
+  \footnote{Compiled on \today{} at \currenttime{}}}
+  \vspace{1em}
+  \textsc{\large CMU 10-301/10-601: Machine Learning (Fall 2019)} \\
+  \vspace{0.5em}
+  \url{https://piazza.com/cmu/fall2019/1030110601/} \\
+  \vspace{0.5em}
+  \centerline{OUT: Sunday, Nov 24th, 2019}
+  %\today{} at \currenttime{}}}
+  \vspace{0.5em}
+  \centerline{DUE: Wednesday, Dec 4th, 2019, 11:59pm}
+    \centerline{TAs: Brynn Edmunds, Yujia Chen, Lisa Hou, Ayushi Sood}
+\end{center}
+
+
+\section*{START HERE: Instructions}
+
+\begin{notebox}
+Homework 8 covers topics on PCA, SVMs, Graphical Models, Baum Welch/Forward-Backward Algorithm, Ensemble Methods and Recommender Systems. The homework includes multiple choice, True/False, and short answer questions. 
+\end{notebox}
+
+\begin{itemize}
+\item \textbf{Collaboration policy:} Collaboration on solving the homework is allowed, after you have thought about the problems on your own. It is also OK to get clarification (but not solutions) from books or online resources, again after you have thought about the problems on your own. There are two requirements: first, cite your collaborators fully and completely (e.g., ``Jane explained to me what is asked in Question 2.1''). Second, write your solution {\em independently}: close the book and all of your notes, and send collaborators out of the room, so that the solution comes from you only.  See the Academic Integrity Section on the course site for more information: \url{http://www.cs.cmu.edu/~mgormley/courses/10601/about.html#7-academic-integrity-policies}
+
+\item\textbf{Late Submission Policy:} See the late submission policy here: \url{http://www.cs.cmu.edu/~mgormley/courses/10601/about.html#6-general-policies}
+
+\item\textbf{Submitting your work:} 
+
+\begin{itemize}
+
+\item \textbf{Gradescope:} For written problems such as short answer, multiple choice, derivations, proofs, or plots, we will be using Gradescope (\url{https://gradescope.com/}). Please use the provided template. Submissions can be handwritten onto the template, but should be labeled and clearly legible. If your writing is not legible, you will not be awarded marks. Alternatively, submissions can be written in LaTeX. Regrade requests can be made, however this gives the TA the opportunity to regrade your entire paper, meaning if additional mistakes are found then points will be deducted.
+Each derivation/proof should be completed on a separate page. For short answer questions, you \textbf{should not} include your work in your solution.  If you include your work in your solutions, your assignment may not be graded correctly by our AI assisted grader. In addition, please tag the problems to the corresponding pages when submitting your work.
+
+\end{itemize}
+
+% \item \textbf{Materials:} Download from autolab the tar file (``Download handout"). The tar file will contain all the data that you will need in order to complete this assignment.
+
+\end{itemize}
+
+For multiple choice or select all that apply questions, shade in the box or circle in the template document corresponding to the correct answer(s) for each of the questions. For \LaTeX users, use $\blacksquare$ and \blackcircle  for shaded boxes and circles, and don't change anything else.
+
+\clearpage
+
+\input{instructions.tex}
+
+\clearpage
+
+% \input{removed_questions.tex}
+%\input{NeuralNets.tex}
+%TODO: add ensemble methods, recommender systems
+% \input{KMeans.tex}
+
+\input{Ensemble.tex}
+\clearpage
+\input{Recommender_system.tex}
+\clearpage
+\input{BaumWelch.tex}
+\clearpage
+\input{GraphicalModels.tex}
+\clearpage
+\input{SVM.tex}
+\clearpage
+\input{PCA.tex}
+\clearpage
+
+
+
+
+
+\begin{comment} 
+{\bf Collaboration Questions} After you have completed all other components of this assignment, report your answers to the collaboration policy questions detailed in the Academic Integrity Policies found \href{http://www.cs.cmu.edu/~mgormley/courses/10601-s18/about.html#7-academic-integrity-policies}{here}.
+    \begin{enumerate*}
+        \item Did you receive any help whatsoever from anyone in solving this assignment? If so, include full details.
+        \item Did you give any help whatsoever to anyone in solving this assignment? If so, include full details?
+        \item Did you find or come across code that implements any part of this assignment ? If so, include full details.
+    \end{enumerate*}
+    
+    \begin{tcolorbox}[fit,height=3cm,blank, borderline={1pt}{-2pt},nobeforeafter]
+    %Input your solution here.  Do not change any of the specifications of this solution box.
+    \end{tcolorbox}
+\end{comment}
+
+
+\textbf{Collaboration Questions} Please answer the following:
+
+
+    After you have completed all other components of this assignment, report your answers to the collaboration policy questions detailed in the Academic Integrity Policies found \href{http://www.cs.cmu.edu/~mgormley/courses/10601bd-f18/about.html#7-academic-integrity-policies}{here}.
+    \begin{enumerate}
+        \item Did you receive any help whatsoever from anyone in solving this assignment? Is so, include full details.
+        \item Did you give any help whatsoever to anyone in solving this assignment? Is so, include full details.
+        \item Did you find or come across code that implements any part of this assignment ? If so, include full details.
+    \end{enumerate}
+    
+    \begin{solution}
+    % If you are using the latex template, remove the empty spaces
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
+    \end{solution}
+    
+
+\end{document}

@@ -1,0 +1,134 @@
+\section{Ensemble Methods [22pt]}
+
+\begin{enumerate}
+ \item \textbf{[3pts]} In the AdaBoost algorithm, if the final hypothesis makes no mistakes on the training data, which of the following is correct?
+    
+    \textbf{Select all that apply:}
+    
+        \begin{list}{}
+        \item $\square$ Additional rounds of training can help reduce the errors made on unseen data.
+        \item $\square$ Additional rounds of training have no impact on unseen data.
+        \item $\square$ The individual weak learners also make zero error on the training data.
+        \item $\square$ Additional rounds of training always leads to worse performance on unseen data.
+
+    \end{list}
+    
+    
+ \item \textbf{[3pts]} Which of the following is true about ensemble method?
+    
+    \textbf{Select all that apply:}
+    
+        \begin{list}{}
+        \item $\square$ Ensemble methods combine together many simple, poorly performing classifiers in order to produce a single, high quality classifier.
+        \item $\square$ Neural networks can be used in the ensemble methods.
+        \item $\square$ For the weighted majority algorithm, the weak classifiers are learned along the way.
+        \item $\square$ For the weighted majority algorithm, we want to give higher weights to better performing models.
+    \end{list}
+    
+
+
+ \item \textbf{[2pt]} 
+    \textbf{True or False:} In AdaBoost weights of the misclassified examples go up by the same multiplicative factor.
+
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+    
+
+
+ \item \textbf{[2pt]} 
+    \textbf{True or False:} AdaBoost will eventually give zero training error regardless of the type of weak classifier it uses, provided enough iterations are performed.
+
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+    
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c| } 
+ \hline
+ Round & $D_t(A)$ & $D_t(B)$ & $D_t(C)$ & $D_t(D)$ & $D_t(E)$ & $D_t(F)$ \\ [4pt]
+  \hline
+  \hline
+ 1 & ? & ? & $\frac{1}{6}$ & ? & ? & ? \\ [4pt]
+  \hline
+ 2 & ? & ? & ? & ? & ? & ? \\ [4pt]
+ \hline
+\multicolumn{7}{|c|}{...}\\[4pt]
+ \hline
+ 219 & ? & ? & ? & ? & ? & ? \\ [4pt]
+  \hline 220 & $\frac{1}{14}$ & $\frac{1}{14}$ & $\frac{7}{14}$ & $\frac{1}{14}$ & $\frac{2}{14}$ & $\frac{2}{14}$ \\ [4pt]
+   \hline
+ 221 & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{7}{20}$ & $\frac{1}{20}$ & $\frac{1}{4}$ & $\frac{1}{10}$ \\ [4pt]
+  \hline
+\multicolumn{7}{|c|}{...}\\[4pt]
+ \hline
+  3017 & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $\frac{1}{16}$ & $\frac{1}{16}$ & 0 \\ [4pt]
+   \hline
+\multicolumn{7}{|c|}{...}\\[4pt]
+ \hline
+  8888 & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ & $\frac{2}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ \\ [4pt]
+   \hline
+\end{tabular}
+\end{center}
+\end{table}  
+
+    \item \textbf{[12pts]} In the last semester, someone used AdaBoost to train some data and recorded all the weights throughout iterations but some entries in the table are not recognizable. Clever as you are, you decide to employ your knowledge of Adaboost to determine some of the missing information.
+    
+    Below, you can see part of table that was used in the problem set. There are columns for the Round \# and for the weights of the six training points (A, B, C, D, E, and F) at the start of each round. Some of the entries, marked with “?”, are impossible for you to read.
+    
+
+    
+
+In the following problems, you may assume that non-consecutive rows are independent of each other, and that a classifier with error less than $\frac{1}{2}$ was chosen at each step.
+
+   \begin{enumerate}
+        \item \textbf{[3pts]}  The weak classifier chosen in Round 1 correctly classified training points A, B, C, and E but misclassified training points D and F. What should the updated weights have been in the following round, Round 2? Please complete the form below.
+   
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c| } 
+ \hline
+ Round & $D_2(A)$ & $D_2(B)$ & $D_2(C)$ & $D_2(D)$ & $D_2(E)$ & $D_2(F)$\\ [4pt]
+  \hline
+  \hline
+ 2 &   &  &   &   &   &   \\ [4pt]
+\hline
+\end{tabular}
+\end{center}
+\end{table}  
+
+    \item \textbf{[3pts]} During Round 219, which of the training points (A, B, C, D, E, F) must have been misclassified, in order to produce the updated weights shown at the start of Round 220? List all the points that were misclassified. If none were misclassified, write `None'. If it can't be decided, write `Not Sure' instead.
+    
+    \begin{tcolorbox}[fit,height=1cm, width=6cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}\\
+
+    \item \textbf{[3pts]} During Round 220, which of the training points (A, B, C, D, E, F) must have been misclassified in order to produce the updated weights shown at the start of Round 221? List all the points that were misclassified.  If none were misclassified, write `None'. If it can't be decided, write `Not Sure' instead.
+
+    \begin{tcolorbox}[fit,height=1cm, width=6cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}\\
+
+    \item \textbf{[3pts]}  You observes that the weights in round 3017 or 8888 (or both) cannot possibly be right. Which one is incorrect? Why? Please explain in one or two short sentences.
+
+    \begin{list}{}
+        \item $\circle$ Round 3017 is incorrect.
+        \item $\circle$ Round 8888 is incorrect.
+        \item $\circle$ Both rounds 3017 and 8888 are incorrect.
+    \end{list}
+
+    \textbf{NOTE: Please do not change the size of the following text box, and keep your answer in it. Thank you!} \\ \\
+    \begin{tcolorbox}[fit,height=4cm, width=15cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \large
+    Your answer.
+
+    \end{tcolorbox} \\
+    
+    
+    
+
+\end{enumerate}
+    
+\end{enumerate}

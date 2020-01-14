@@ -1,0 +1,204 @@
+\section{Support Vector Machines [14 pts]}
+
+ In class, we discussed the properties and formulation of hard-margin SVMs, where we assume the decision boundary to be linear and attempt to find the hyperplane with the largest margin. Here, we introduce a new class of SVM called soft margin SVM, where we introduce the slack variables $e_i$ to the optimization problem and relax the assumptions. The formulation of soft margin SVM with no Kernel is
+    \begin{equation*}
+    \begin{aligned}
+    & \underset{\mathbf{w}, b, e}{\text{minimize}}
+    & & \frac{1}{2}\|\mathbf{w}\|_2^2 + C\left(\sum_{i = 1}^N e_i\right)\\
+    & \text{subject to}
+    & & y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \geq 1 - e_i, \, \, \forall \; i = 1, \dots, N\\
+    & & & e_i \geq 0, \, \, \forall \; i = 1, \dots, N
+    \end{aligned}
+    \end{equation*}
+\begin{enumerate}
+    \item \textbf{[3pts]} Consider the $i$th training example $(\mathbf{x}^{(i)}, y^{(i)})$ and its corresponding slack variable $e_i$. Assuming $C > 0$ and is fixed, what would happen as $e_i \rightarrow \infty$?
+    
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ the constraint $y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \geq 1 - e_i$ would hold for any $\mathbf{w}$ with finite entries.
+        \item $\square$ there would be no vector that satisfies the constraint $y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \geq 1 - e_i$
+        \item $\square$ the objective function would approach infinity.
+    \end{list}
+    
+    
+    With this in mind, we hope that you can see why soft margin SVM can be applied even when the data is not linearly separable.
+    
+    
+    %\clearpage
+    
+    % Adjusting C in soft margin SVMs
+    \item \textbf{[4pts]} Which of the following are true when $C \rightarrow \infty$? Assume that the data is \textbf{not} linearly separable, unless otherwise specified.
+    
+    \textbf{Select all that apply:}
+    
+        \begin{list}{}
+        \item $\square$ When the data is linearly separable, the solution to the soft margin SVM would converge to the solution of hard margin SVM.
+        \item $\square$ There is no solution $\mathbf{w}, b$ satisfying all the constraints in the optimization problem with a non-infinite objective value.
+        % CONFUSING: \item $\square$ Any arbitrary vector $\mathbf{w}$ and scalar $b$ can satisfy the constraints in the optimization problem.
+        \item $\square$ The optimal weight vector would converge to the zero vector $\mathbf{0}$.
+        \item $\square$ When $C$ approaches to infinity, it could help reduce overfitting.
+    \end{list}
+    
+    
+    \clearpage
+    
+    \item \textbf{[4pts]} Which of the following are true when $C \rightarrow 0$? Assume that the data is \textbf{not} linearly separable, unless otherwise specified.
+    
+    \textbf{Select all that apply:}
+    
+    \begin{list}{}
+        \item $\square$ When the data is linearly separable, the solution to the soft margin SVM would converge to the solution of hard margin SVM.
+        \item $\square$ There is no solution $\mathbf{w}, b$ satisfying all the constraints in the optimization problem with a non-infinite objective value.
+        % CONFUSING: \item $\square$ Any arbitrary vector $\mathbf{w}$ and scalar $b$ can satisfy the constraints in the optimization problem.
+        \item $\square$ The optimal weight vector would converge to be the zero vector $\mathbf{0}$.
+        \item $\square$ When $C$ approaches to 0, doing so could help reduce overfitting.
+    \end{list}
+    
+    %\clearpage
+    
+    \item \textbf{[3pts]} An extension to soft margin SVM (or, an extension to the hard margin SVM we talked in class) is the 2-norm SVM with the following primal formulation
+    
+    \begin{equation*}
+        \begin{aligned}
+        & \underset{\mathbf{w}, b, e}{\text{minimize}}
+        & & \frac{1}{2}\|\mathbf{w}\|_2^2 + C\left(\sum_{i = 1}^N e_i^2\right)\\
+        & \text{subject to}
+        & & y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \geq 1 - e_i, \, \, \forall \; i = 1, \dots, N\\
+        & & & e_i \geq 0, \, \, \forall \; i = 1, \dots N
+        \end{aligned}
+    \end{equation*}
+    
+    Which of the following is true about the 2-norm SVM? (Hint: think about $\ell_1$-regularization versus $\ell_2$ regularization!)
+    
+    \textbf{Select one:}
+        \begin{list}{}
+        \item $\circle$ If a particular pair of parameters $\mathbf{w}^*, b^*$ minimizes the objective function in soft margin SVM, then this pair of parameters is guaranteed to minimize the objective function in 2-norm SVM.
+        \item $\circle$ 2-norm SVM penalizes large $e_i$'s more heavily than soft margin SVM.
+        \item $\circle$ One drawback of 2-norm SVM is that it cannot utilize the kernel trick.
+        \item $\circle$ None of the above.
+    \end{list}
+    
+    
+    % \begin{figure}[H]
+    %   \centering
+    %      \includegraphics[width=0.7\linewidth]{figures/svm}
+    %      \caption{SVM dataset}
+    %   \label{fig:SVM}
+    %  \end{figure}
+    % \item \textbf{[3pts]} Consider the dataset shown in Figure~\ref{fig:SVM}. Which of the following models, when properly tuned, could correctly classify \textbf{ALL} the data points?
+    
+    % \textbf{Select all that apply:}
+    
+    %     \begin{list}{}
+    % \item $\square$ Logistic Regression without any kernel
+    % \item $\square$ Hard margin SVM without any kernel
+    % \item $\square$ Soft margin SVM without any kernel
+    % \item $\square$ Hard margin SVM with RBF Kernel
+    % \item $\square$ Soft margin SVM with RBF Kernel
+    % \end{list}
+    
+    \end{enumerate}
+    
+    \clearpage
+    \begin{comment}
+    \section{Kernels [19pts]}
+    \begin{enumerate}
+    \item \textbf{[2pt]} Consider the following kernel function:
+
+    \[K(\xv, \xv') = \begin{cases}{\text{1,  if } \xv = \xv'} \\{\text{0,  otherwise}}\end{cases}\]
+
+    \textbf{True or False:} In this kernel space, any labeling of a set of instances $\{\xv^{(1)}, \xv^{(2)}, \ldots, \xv^{(N)} \}$ from a training set will be linearly separable. Assume that no two points in this instance set are identical.
+
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+    
+    
+    \item \textbf{[3pts]} Suppose that input-space is two-dimensional, \( x = (x_1, x_2)^T\). The feature mapping is defined as - \[\phi(x) = (x_1^2, x_2^2, 1, \sqrt{2}x_1x_2, \sqrt{2}x_1,\sqrt{2}x_2)^T\]
+    
+    What is the corresponding kernel function, i.e. \(K(x,z)\)? \textbf{Select one.}
+
+    
+    \begin{list}{}
+        \item $\circle$ \( (x_1z_1)^2 +(x_2z_2)^2 +1 \)
+        \item $\circle$ \( (1 + x^T z)^2 \)
+        \item $\circle$ \( (x^T z)^2 \)
+        \item $\circle$ \( x^T z \)
+    \end{list}
+    
+    \item \textbf{[3pts]} Suppose that input-space is three-dimensional, \( x = (x_1, x_2, x_3)^T\). The feature mapping is defined as - \[\phi(x) = (x_1^2, x_2^2, x_3^2, \sqrt{2}x_1x_2, \sqrt{2}x_1x_3,\sqrt{2}x_2x_3)^T\]
+
+    Suppose we want to compute the value of kernel function \(K(x,z)\) on two vectors \(x,z \in {\mathbb{R}}^3\). We want to check how many additions and multiplications are needed if you map the input vector to the feature space and then perform dot product on the mapped features. Report \(\alpha + \beta\), where \(\alpha\) is the number of multiplications and \(\beta\) is the number of additions.
+
+    Note: Multiplication/Addition with constants should also be included in the counts.
+    
+    \begin{tcolorbox}[fit,height=1cm, width=2cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    %solution
+    \end{tcolorbox}
+    
+    \item \textbf{[3pts]} Suppose that input-space is three-dimensional, \( x = (x_1, x_2, x_3)^T\). The feature mapping is defined as - \[\phi(x) = (x_1^2, x_2^2, x_3^2, \sqrt{2}x_1x_2, \sqrt{2}x_1x_3,\sqrt{2}x_2x_3)^T\]
+
+    Suppose we want to compute the value of kernel function \(K(x,z)\) on two vectors \(x,z \in {\mathbb{R}}^3\).We want to check how many additions and multiplications are needed if you do the computation through the kernel function you derived above. Report \(\alpha + \beta\), where \(\alpha\) is the number of multiplications and \(\beta\) is the number of additions.
+
+    Note: Multiplication/Addition with constants should also be included in the counts.
+    
+    \begin{tcolorbox}[fit,height=1cm, width=2cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    %solution
+    \end{tcolorbox}
+    
+    
+    \item \textbf{[3pts]} Suppose one dataset contains four data points in \(\R^1\) space, as shown in Figure~\ref{fig:lindata}
+
+    \begin{figure}[H]
+    \centering
+        \includegraphics[width=0.7\linewidth]{figures/lineardataset.png}
+        \caption{Data in $\R^1$}
+        \label{fig:lindata}
+    \end{figure}
+
+
+    Different shapes of the points indicate different labels. If we train a linear classifier on the dataset, what is the lowest training error for a linear classifier on \(\R^1\)?
+    
+    \begin{tcolorbox}[fit,height=1cm, width=2cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    %solution
+    \end{tcolorbox}
+    
+    \item \textbf{[3pts]} Following the above question, which of the feature mappings below can we use to project the dataset to higher dimensional space such that training a linear classifier on the projected dataset would yield zero training error?
+        \begin{list}{}
+        \item $\circle$ \(\phi(x) = (x, 1)\)
+        \item $\circle$ \(\phi(x) = (x, x^3)\)
+        \item $\circle$ \(\phi(x) = (x, x^2)\)
+        \item $\circle$ \(\phi(x) = (x, (x+1)^2)\)
+    \end{list}
+
+    
+    
+    \item \textbf{[2pt]} \textbf{True or False:} Given the same training data, in which the points are linearly separable, the margin of the decision boundary produced by SVM will always be greater than or equal to the margin of the decision boundary produced by Perceptron.
+    
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+    
+    
+\end{enumerate}
+\clearpage
+% \section{EM}
+% \begin{center}
+%     \textbf{!!!Listed in Slack channel as a potential topic but was not discussed in lecture! Included for completeness!!!}
+% \end{center}
+% \begin{enumerate}
+%     \item Which of the following is \textbf{correct} about EM?
+    
+%     \textbf{Select one:}
+%     \begin{list}{}
+%         \item $\circle$ The EM algorithm is guaranteed to converge to the global optimum.
+%         \item $\circle$ If we start the EM algorithm with different starting values, we are guaranteed to obtain the same solution after the algorithm converges.
+%         \item $\circle$ It is possible for the objective function to decrease during an iteration of EM.
+%         \item $\circle$ None of the above.
+%     \end{list}
+    
+% \end{enumerate}
+%\clearpage
+\end{comment}

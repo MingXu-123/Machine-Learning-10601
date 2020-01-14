@@ -1,0 +1,236 @@
+\section{Linear Regression [40 pts]}
+\begin{enumerate}
+
+    \item \textbf{[4pt]} Suppose you have data ${(x^{(1)}, y^{(1)}), \ldots, (x^{(n)}, y^{(n)})}$ and the solution to linear regression on this data is $y = w_1 x + b_1$. Now suppose we have the dataset \\
+    ${(x^{(1)} + \alpha, y^{(1)} + \beta), \ldots, (x^{(n)} + \alpha, y^{(n)} + \beta)}$ where $\alpha > 0, \beta > 0$ and $w_1 \alpha \neq \beta$. The solution to the linear regression on this dataset is $y = w_2 x + b_2$. Please select the correct statement about $w_1, w_2, b_1, b_2$ below. Note that the statement should hold no matter what values $\alpha, \beta$ take on within the specified constraints.
+    
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $w_1 = w_2, b_1 = b_2$
+        \item $\circle$ $w_1 \neq w_2, b_1 = b_2$
+        \item $\circle$ $w_1 = w_2, b_1 \neq b_2$
+        \item $\circle$ $w_1 \neq w_2, b_1 \neq b_2$
+    \end{list}
+    
+
+    \item \textbf{[4pt]} We would like to fit a linear regression estimate to the dataset 
+    $$
+    D = \left\{\left(\xv^{(1)},y^{(1)}\right), \left(\xv^{(2)},y^{(2)}\right),\cdots, \left(\xv^{(N)},y^{(N)}\right)\right\}
+    $$ with $\xv^{(i)} \in \mathbb{R}^M$ by minimizing the ordinary least square (OLS) objective function:
+    $$
+    J(\wv) = \frac{1}{2}\sum_{i=1}^N\left(y^{(i)} - \sum_{j=1}^M w_j x_j^{(i)}\right)^2
+    $$
+    Specifically, we solve for each coefficient $w_k$ ($1\leq k\leq M$) by deriving an expression of $w_k$ from the critical point $\frac{\partial J(\wv)}{\partial w_k} = 0$. What is the expression for each $w_k$ in terms of the dataset $(\xv^{(1)},y^{(1)}), (\xv^{(2)},y^{(2)}),\cdots, (\xv^{(N)},y^{(N)})$ and $w_1,\cdots,w_{k-1},w_{k+1},\cdots,w_M$?
+
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $w_k = \frac{\sum_{i=1}^N x_k^{(i)}(y^{(i)}-\sum_{j=1,j\neq k}^M w_j x_j^{(i)})}{\sum_{i=1}^N (x_k^{(i)})^2}$
+        \item $\circle$ $w_k = \frac{\sum_{i=1}^N x_k^{(i)}(y^{(i)}-\sum_{j=1,j\neq k}^M w_j x_j^{(i)})}{\sum_{i=1}^N (y^{(i)})^2}$
+        \item $\circle$ $w_k = \sum_{i=1}^N x_k^{(i)}(y^{(i)}-\sum_{j=1}^M w_j x_j^{(i)})$
+        \item $\circle$ $w_k = \frac{\sum_{i=1}^N x_k^{(i)}(y^{(i)}-\sum_{j=1,j\neq k}^M w_j x_j^{(i)})}{\sum_{i=1}^N (x_k^{(i)} y^{(i)})^2}$
+    \end{list}
+
+    
+    
+    \clearpage
+    
+    \item \textbf{[3pt]} Continuing from the above question, how many coefficients do you need to estimate? When solving for these coefficients, how many equations do you have?
+    
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $N$ coefficients, $M$ equations
+        \item $\circle$ $M$ coefficients, $N$ equations
+        \item $\circle$ $M$ coefficients, $M$ equations
+        \item $\circle$ $N$ coefficients, $N$ equations
+    \end{list}
+    
+    
+    \item \textbf{[3pt]} Consider the following 3 data points for linear regression: $x^{(1)} = [0, 1, 2]^T$, $x^{(2)} = [1, 0, 2]^T$ and $x^{(3)} = [2, 1, 0]^T$. The corresponding y values are $y^{(1)}=3$, $y^{(2)}=6$, $y^{(3)}=9$.
+    
+    Assume the intercept to be 0. Find the weights $\theta = [\theta_1,  \theta_2,  \theta_3]^T \in \mathbb{R}^3$ such that the mean squared error $J(\theta) = (\textbf{y} - X\theta)^T(\textbf{y} - X\theta)$ is minimized on this training set. $X$ is the design matrix where $X_{ij} = x_j^{(i)}$. 
+    
+    $\theta_1$: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    $\theta_2$: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    $\theta_3$: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+
+    \item \textbf{[1pt]} Suppose we are working with datasets where the number of features is 3. The optimal solution for linear regression is always unique regardless of the number of data points that are in this dataset.
+    
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+    
+    
+    \item \textbf{[1pt]} Assume that a data set has $M$ data points and $N$ variables, where $M>N$. As long as we use a convex loss function, the regression problem will return the same set of solutions.
+    
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+    
+    
+    \newpage
+    \item \textbf{[1pt]} Consider the following dataset:
+        \begin{table}[H]
+    \centering
+        \begin{tabular}{llllll}
+        x & 1.0 & 2.0 & 3.0 & 4.0 & 5.0 \\
+        z & 2.0 & 4.0 & 6.0 & 8.0 & 10.0 \\
+        y & 4.0 & 7.0 & 8.0 & 11.0 & 17.0
+        \end{tabular}
+    \end{table}
+   We want to carry out a multiple-linear regression between $y$ (Dependent Variable) and $x$ and $z$ (Independent Variables). The closed-form solution given by $\wv = \left(\Xv^T\Xv\right)^{-1}\Xv^T Y$ will return the unique solution. 
+    \\~\\
+    Note: The $i^{th}$ row of $\Xv$ contains the $i^{th}$ data point $(x_i,z_i)$ while the $i^{th}$ row of $\Yv$ contains the $i^{th}$ data point $y_i$. 
+    
+        \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ True
+        \item $\circle$ False
+    \end{list}
+    
+
+    
+    \item \textbf{[3 pt]} Order the following different formulations of the regression cost function according to sensitivity to outliers from the most sensitive to the least sensitive. 
+\begin{enumerate}
+    \item $J(\mathbf{w}) = \sum\limits_{i} | (x^i)^T\mathbf{w}-y^i|^2$
+    \item $J(\mathbf{w}) = \sum\limits_{i} | (x^i)^T\mathbf{w}-y^i|^4$
+    \item $J(\mathbf{w}) = \sum\limits_{i} | (x^i)^T\mathbf{w}-y^i|$
+\end{enumerate}
+
+\textbf{Order the cost functions here:}
+
+    1: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=2cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    2: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=2cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    3: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=2cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    \newpage
+    \item \textbf{[2 pt]} Which of the following are true about regularization?
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ One of the goals of regularization is combating overfitting.
+        \item $\square$ A model with regularization fits the training data better than a model without regularization 
+        \item $\square$ The L-0 norm (number of non-zero parameters) is rarely used in practice in part because it is non-differentiable. 
+        \item $\square$ One way to understand regularization is that it attempts to follow Occam's razor and make the learning algorithm prefer "simpler" solutions.
+    \end{list}
+    
+    \item \textbf{[3pt]} Identifying whether a function is a convex function is useful because a convex function's local minimum has the nice property that it has to be the global minimum. Please select all functions below that are convex functions. Note $dom(f)$ denotes the domain of the function $f$.
+    
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ $f(x) = x, dom(f) = \mathbb{R}$
+        \item $\square$ $f(x) = x^3 + 2x + 3, dom(f) = \mathbb{R}$
+        \item $\square$ $f(x) = \log x, dom(f) = \mathbb{R}_{++}$ (the set of positive real numbers)
+        \item $\square$ $f(x) = |x|, dom(f) = \mathbb{R}$
+        \item $\square$ $f(x) = ||\xv||_2,\, dom(f) = \mathbb{R}^n$
+        \item $\square$ None of the above.
+    \end{list}
+
+
+    \item \textbf{[2pt]} Typically we can solve linear regression problems in two ways. One is through direct methods, e.g. solving the closed form solution, and the other is through iterative methods (gradient descent). Consider a linear regression on data $(\Xv, \yv)$. We assume each row in $\Xv$ denotes one input in the dataset. Please select all correct options.
+    
+    \textbf{Select all that apply:}
+    \begin{list}{}
+        \item $\square$ If the matrix $\Xv^T\Xv$ is invertible, the exact solution is always preferred for solving the solution to linear regression as computing matrix inversions and multiplications are fast regardless of the size of the dataset.
+        \item $\square$ Assume $N$ is the number of examples and $M$ is the number of features. The computational complexity of $N$ iterations of batch gradient descent is $\mathcal{O}(MN)$.
+        \item $\square$ The computational complexity of the closed form solution is linear in number of parameters/features.
+        \item $\square$ None of the above.
+    \end{list}
+    
+    
+    
+    \newpage
+    \item \textbf{[3 pts]} When performing linear regression, which of the following options will decrease mean-squared training error:
+    
+    \textbf{Select all that apply:}
+        \begin{list}{}
+        \item $\square$ Increasing the order of the polynomial
+        \item $\square$ Increasing the regularization weight
+        \item $\square$ For the same weight on the regularizer, using an L1 regularizer instead of an L2
+        \item $\square$ For the same weight on the regularizer, using an L1 regularizer instead of an L0
+        \item $\square$ None of the above
+        \end{list}
+
+
+    
+    \item \textbf{[2pt]} \label{Q7_linear_regression} Consider the following dataset:
+    \begin{table}[H]
+    \centering
+        \begin{tabular}{llllll}
+        x & 1.0 & 2.0 & 3.0 & 4.0 & 5.0 \\
+        y & 3.0 & 8.0 & 9.0 & 12.0 & 15.0
+        \end{tabular}
+    \end{table}
+    If we initialize the weight as $2.0$ and intercept as $0.0$, what is the gradient of the loss function with respect to the weight $w$, calculated over all the data points, in the first step of the gradient descent update? Note that we do not introduce any regularization in this problem and and our objective function looks like $\frac{1}{N}\sum_{i=1}^N (wx_i + b - y_i)^2$, where $N$ is the number of data points, $w$ is the weight, and $b$ is the intercept.
+    
+    Fill in the blank with the gradient on the weight you computed, rounded to 2 decimal places after the decimal point.
+    
+    \begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    
+    \item \textbf{[4pt]} Based on the data of the previous question, please compute the direct solution of the weight and the intercept for the objective function defined in the previous question, rounded to 2 decimal places after the decimal point.
+    
+    Weight: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    Intercept: \quad
+    \begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    
+    \newpage
+    \item \textbf{[2pt]} Using the dataset and model given in question \ref{Q7_linear_regression}, perform two steps of batch gradient descent on the data. Fill in the blank with the value of the weight after two steps of batch gradient descent. Let the learning rate be $0.01$. Round to 2 decimal places after the decimal point.
+    
+    \begin{tcolorbox}[fit,height=1cm, width=4cm, blank, borderline={1pt}{-2pt},nobeforeafter]
+    \end{tcolorbox}
+    
+    
+    
+    \item \textbf{[2pt]} Using the dataset and model given in question \ref{Q7_linear_regression}, which of the following learning rates leads to the most optimal weight and intercept after performing two steps of batch gradient descent? (Hint: The most optimal learned parameters are the parameters that lead to the lowest value of the objective function.)
+    
+    \textbf{Select one:}
+    \begin{list}{}
+        \item $\circle$ $1$
+        \item $\circle$ $0.1$
+        \item $\circle$ $0.01$
+        \item $\circle$ $0.001$
+    \end{list}
+    
+    
+    
+
+    \clearpage
+\end{enumerate}
+
+
+
